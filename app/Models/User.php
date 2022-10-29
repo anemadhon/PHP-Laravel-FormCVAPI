@@ -34,7 +34,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'updated_at' => 'timestampt',
+        'updated_at' => 'timestamp',
     ];
 
     public function workHistories()
@@ -50,5 +50,10 @@ class User extends Authenticatable
     public function skills()
     {
         return $this->hasMany(UserSkill::class);
+    }
+
+    public function application()
+    {
+        return $this->belongsTo(Application::class);
     }
 }
