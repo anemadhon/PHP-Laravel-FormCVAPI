@@ -31,3 +31,9 @@ Route::post('/employments/{code}', [\App\Http\Controllers\WorkHistoryController:
 Route::apiResource('/employments', \App\Http\Controllers\WorkHistoryController::class)->scoped([
     'employment' => 'code'
 ])->only(['show', 'destroy']);
+
+Route::post('/educations/{code}', [\App\Http\Controllers\EducationController::class, 'store'])
+    ->name('educations.store');
+Route::apiResource('/educations', \App\Http\Controllers\EducationController::class)->scoped([
+    'education' => 'code'
+])->only(['show', 'destroy']);
