@@ -25,3 +25,9 @@ Route::apiResource('/profiles', \App\Http\Controllers\ApplicationController::cla
 Route::apiResource('/experiences', \App\Http\Controllers\WorkSummaryController::class)->scoped([
     'experience' => 'code'
 ])->only(['show', 'update']);
+
+Route::post('/employments/{code}', [\App\Http\Controllers\WorkHistoryController::class, 'store'])
+    ->name('employments.store');
+Route::apiResource('/employments', \App\Http\Controllers\WorkHistoryController::class)->scoped([
+    'employment' => 'code'
+])->only(['show', 'destroy']);
