@@ -37,3 +37,9 @@ Route::post('/educations/{code}', [\App\Http\Controllers\EducationController::cl
 Route::apiResource('/educations', \App\Http\Controllers\EducationController::class)->scoped([
     'education' => 'code'
 ])->only(['show', 'destroy']);
+
+Route::post('/skills/{code}', [\App\Http\Controllers\SkillController::class, 'store'])
+    ->name('skills.store');
+Route::apiResource('/skills', \App\Http\Controllers\SkillController::class)->scoped([
+    'skill' => 'code'
+])->only(['show', 'destroy']);
