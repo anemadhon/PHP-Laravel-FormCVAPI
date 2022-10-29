@@ -9,20 +9,24 @@ class Application extends Model
 {
     use HasFactory;
 
-    const CREATED_AT = 'applied_at';
-    const UPDATED_AT = false;
+    protected $dateFormat = 'U';
 
-    public $timestamps = false;
+    const CREATED_AT = 'applied_at';
+    const UPDATED_AT = null;
 
     protected $fillable = [
         'available_job_id',
-        'candidate_id',
         'code', 'applied_at'
     ];
 
     protected $cast = [
         'applied_at' => 'timestamp'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 
     public function availableJob()
     {
