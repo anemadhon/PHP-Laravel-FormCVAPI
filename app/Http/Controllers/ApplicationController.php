@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ApplicationRequest;
+use App\Http\Resources\GetProfileResource;
 use App\Http\Resources\ProfileResource;
 use App\Models\Application;
 use App\Services\ApplicationServices;
@@ -39,9 +40,16 @@ class ApplicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Application $application)
+    public function show(Application $profile)
     {
-        //
+        return GetProfileResource::make($profile->load([
+            'availableJob', 
+            'user', 
+            'user.home', 
+            'user.home.country', 
+            'user.home.city', 
+            'user.photo'
+        ]));
     }
 
     /**
