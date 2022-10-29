@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ApplicationRequest;
+use App\Http\Resources\DMLQueryResource;
 use App\Http\Resources\GetProfileResource;
-use App\Http\Resources\ProfileResource;
 use App\Models\Application;
 use App\Services\ApplicationServices;
 
@@ -42,7 +42,7 @@ class ApplicationController extends Controller
         $payload = $applicationServices->payloadPreparetion($request->validated());
         $application = $applicationServices->storeToDB($payload);
 
-        return ProfileResource::make($application);
+        return DMLQueryResource::make($application);
     }
 
     /**
@@ -78,6 +78,6 @@ class ApplicationController extends Controller
         $payload = $applicationServices->payloadPreparetion($request->validated());
         $updatedApplication = $applicationServices->updateData($payload, $profile);
 
-        return ProfileResource::make($updatedApplication);
+        return DMLQueryResource::make($updatedApplication);
     }
 }
