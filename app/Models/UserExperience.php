@@ -11,7 +11,7 @@ class UserExperience extends Model
 
     protected $dateFormat = 'U';
 
-    const CREATED_AT = false;
+    const CREATED_AT = null;
 
     protected $fillable = ['work_summary'];
     protected $casts = [

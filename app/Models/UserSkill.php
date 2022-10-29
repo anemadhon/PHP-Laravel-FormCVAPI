@@ -12,7 +12,7 @@ class UserSkill extends Model
     protected $dateFormat = 'U';
 
     const CREATED_AT = 'added_at';
-    const UPDATED_AT = false;
+    const UPDATED_AT = null;
 
     protected $fillable = [
         'skill_id', 'level', 'added_at'

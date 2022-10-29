@@ -12,7 +12,7 @@ class UserWorkHistory extends Model
     protected $dateFormat = 'U';
 
     const CREATED_AT = 'added_at';
-    const UPDATED_AT = false;
+    const UPDATED_AT = null;
 
     protected $fillable = [
         'city_id', 'title', 'employer',

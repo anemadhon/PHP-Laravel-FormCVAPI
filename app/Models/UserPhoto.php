@@ -11,7 +11,7 @@ class UserPhoto extends Model
 
     protected $dateFormat = 'U';
 
-    const CREATED_AT = false;
+    const CREATED_AT = null;
     const UPDATED_AT = 'uploaded_at';
 
     protected $fillable = ['base_64_photo', 'uploaded_at'];
