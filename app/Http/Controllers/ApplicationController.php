@@ -17,7 +17,16 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        //
+        $applications = Application::with([
+            'availableJob', 
+            'user', 
+            'user.home', 
+            'user.home.country', 
+            'user.home.city', 
+            'user.photo'
+        ])->get();
+
+        return GetProfileResource::collection($applications);
     }
 
     /**
