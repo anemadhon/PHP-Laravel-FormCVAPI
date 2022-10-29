@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/profiles', \App\Http\Controllers\ApplicationController::class)->scoped([
     'profile' => 'code'
 ])->except('destroy');
+
+Route::apiResource('/experiences', \App\Http\Controllers\WorkSummaryController::class)->scoped([
+    'experience' => 'code'
+])->only(['show', 'update']);
