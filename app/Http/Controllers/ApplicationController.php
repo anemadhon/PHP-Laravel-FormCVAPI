@@ -35,8 +35,10 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ApplicationRequest $request, ApplicationServices $applicationServices)
-    {
+    public function store(
+        ApplicationRequest $request, 
+        ApplicationServices $applicationServices
+    ){
         $payload = $applicationServices->payloadPreparetion($request->validated());
         $application = $applicationServices->storeToDB($payload);
 
@@ -68,8 +70,11 @@ class ApplicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApplicationRequest $request, Application $profile, ApplicationServices $applicationServices)
-    {
+    public function update(
+        ApplicationRequest $request, 
+        Application $profile, 
+        ApplicationServices $applicationServices
+    ){
         $payload = $applicationServices->payloadPreparetion($request->validated());
         $updatedApplication = $applicationServices->updateData($payload, $profile);
 
