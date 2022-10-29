@@ -12,25 +12,20 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $dateFormat = 'U';
+
+    const CREATED_AT = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
+        'first_name', 'last_name',
+        'email', 'phone', 'birth_data',
+        'birth_place', 'nationality',
+        'driving_license'
     ];
 
     /**
@@ -39,6 +34,21 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'updated_at' => 'timestampt',
     ];
+
+    public function workHistories()
+    {
+        return $this->hasMany(UserWorkHistory::class);
+    }
+    
+    public function educations()
+    {
+        return $this->hasMany(UserEducation::class);
+    }
+    
+    public function skills()
+    {
+        return $this->hasMany(UserSkill::class);
+    }
 }
