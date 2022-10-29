@@ -19,7 +19,7 @@ class UserSkill extends Model
     ];
 
     protected $casts = [
-        'added_at' => 'timestampt',
+        'added_at' => 'timestamp',
     ];
 
     public function user()

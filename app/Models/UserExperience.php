@@ -15,7 +15,7 @@ class UserExperience extends Model
 
     protected $fillable = ['work_summary'];
     protected $casts = [
-        'updated_at' => 'timestampt',
+        'updated_at' => 'timestamp',
     ];
 
     public function user()

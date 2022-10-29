@@ -16,7 +16,7 @@ class UserPhoto extends Model
 
     protected $fillable = ['base_64_photo', 'uploaded_at'];
     protected $casts = [
-        'uploaded_at' => 'timestampt',
+        'uploaded_at' => 'timestamp',
     ];
 
     public function user()
