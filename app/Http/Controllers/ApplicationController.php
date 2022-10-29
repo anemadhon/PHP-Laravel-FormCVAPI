@@ -51,8 +51,11 @@ class ApplicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApplicationRequest $request, Application $application)
+    public function update(ApplicationRequest $request, Application $profile, ApplicationServices $applicationServices)
     {
-        //
+        $payload = $applicationServices->payloadPreparetion($request->validated());
+        $updatedApplication = $applicationServices->updateData($payload, $profile);
+
+        return ProfileResource::make($updatedApplication);
     }
 }

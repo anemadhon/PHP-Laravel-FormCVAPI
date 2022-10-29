@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ApplicationRequest extends FormRequest
 {
@@ -23,11 +24,13 @@ class ApplicationRequest extends FormRequest
      */
     public function rules()
     {
+        $unique = $this->isMethod('POST') ? 'unique:users,email' : 'unique:users,email,'.$this->profile->load('user')->user->id;
+
         return [
             'available_job_id' => ['required', 'integer', 'exists:available_jobs,id'],
             'first_name' => ['required', 'string', 'min:3', 'max:25'],
             'last_name' => ['required', 'string', 'min:3', 'max:25'],
-            'email' => ['required', 'string', 'email', 'unique:users,email'],
+            'email' => ['required', 'string', 'email', $unique],
             'phone' => ['required', 'string', 'min:11', 'max:15'],
             'nationality' => ['required', 'string', 'min:3', 'max:100'],
             'driving_license' => ['required', 'string', 'min:3', 'max:100'],

@@ -49,4 +49,15 @@ class ApplicationServices
             return $application;
         }, 5);
     }
+    
+    public function updateData(array $payload, Application $application)
+    {
+        return DB::transaction(function () use ($payload, $application) {
+            $application->update(['available_job_id' => $payload['application']['available_job_id']]);
+            $application->user->update($payload['user']);
+            $application->user->home->update($payload['user_home']);
+
+            return $application;
+        }, 5);
+    }
 }
