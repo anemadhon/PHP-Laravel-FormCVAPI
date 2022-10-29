@@ -19,5 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/profiles', \App\Http\Controllers\ApplicationController::class)->scoped([
-    'application' => 'code'
+    'profile' => 'code'
 ])->except('destroy');
