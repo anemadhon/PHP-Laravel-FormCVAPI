@@ -10,7 +10,7 @@ class AvailableJob extends Model
 {
     use HasFactory, Sluggable;
 
-    public $timestampt = false;
+    public $timestamps = false;
     
     protected $fillable = ['name', 'slug'];
 

@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class City extends Model
 {
     use HasFactory, Sluggable;
     
-    public $timestamp = false;
+    public $timestamps = false;
     
     protected $fillable = ['country_id', 'name', 'slug'];
 

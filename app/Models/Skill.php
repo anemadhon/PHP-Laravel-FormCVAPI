@@ -10,7 +10,7 @@ class Skill extends Model
 {
     use HasFactory, Sluggable;
 
-    public $timestamp = false;
+    public $timestamps = false;
     
     protected $fillable = ['name', 'slug'];
 

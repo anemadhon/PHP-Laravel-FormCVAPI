@@ -9,7 +9,7 @@ class UserHome extends Model
 {
     use HasFactory;
 
-    public $timestampt = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'country_id', 'city_id',
