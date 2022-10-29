@@ -12,7 +12,7 @@ class EducationServices
 
         $education = $application->load([
             'user', 
-            'user.workHistories'
+            'user.educations'
         ])->user
             ->educations()
             ->create($request);
@@ -24,7 +24,7 @@ class EducationServices
     {
         $application->load(['user', 'user.educations'])
             ->user
-            ->educationis()
+            ->educations()
             ->where('id', $id)
             ->delete();
 

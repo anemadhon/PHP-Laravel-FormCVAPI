@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EducationRequest;
-use App\Http\Resources\GetEducationResource;
 use App\Models\Application;
-use App\Services\EducationServices;
 use Illuminate\Http\Request;
+use App\Services\EducationServices;
+use App\Http\Requests\EducationRequest;
+use App\Http\Resources\DMLQueryResource;
+use App\Http\Resources\GetEducationResource;
 
 class EducationController extends Controller
 {
@@ -36,11 +37,11 @@ class EducationController extends Controller
     {
         $userEducation = $education->load([
             'user', 
-            'user.workHistories', 
-            'user.workHistories.city'
+            'user.educations', 
+            'user.educations.city'
         ])->user->educations;
 
-        return GetEducationResource::make($userEducation);
+        return GetEducationResource::collection($userEducation);
     }
 
     /**

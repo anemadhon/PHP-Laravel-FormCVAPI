@@ -9,6 +9,7 @@ class UserEducation extends Model
 {
     use HasFactory;
 
+    protected $table = 'user_educations';
     protected $dateFormat = 'U';
 
     const CREATED_AT = 'added_at';

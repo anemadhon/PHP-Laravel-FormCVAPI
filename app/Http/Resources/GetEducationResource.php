@@ -21,7 +21,7 @@ class GetEducationResource extends JsonResource
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'city' => $this->city->name,
-            'description' => $this->birth_place,
+            'description' => $this->description,
         ];
     }
 }
