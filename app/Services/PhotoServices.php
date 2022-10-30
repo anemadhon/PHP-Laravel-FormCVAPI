@@ -3,14 +3,14 @@
 namespace App\Services;
 
 use App\Models\Application;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class PhotoServices
 {
     public function upload(Application $application, array $request)
     {
-        $path = $this->moveToStorage($request['base_64_photo']);
+        $path = $this->moveToStorage($application->code, $request['base_64_photo']);
+
         $this->storeToDB($application, $request);
 
         return $path;
@@ -26,6 +26,8 @@ class PhotoServices
         $photo64ID = $photo64->id;
 
         $photo64->delete();
+
+        $this->deleteFromStorage($application->code, $photo64->base_64_photo);
 
         return (new UtilServices())->convertToJson(['code' => $application->code, 'id' => $photo64ID]);
     }
@@ -43,14 +45,32 @@ class PhotoServices
             );
     }
 
-    private function moveToStorage(string $base64photo)
+    private function moveToStorage(string $code, string $base64photo)
+    {
+        $extracted = $this->extractBase64($code, $base64photo);
+
+        Storage::disk('public')->put("upload/photo/{$extracted['filename']}", $extracted['decoded']);
+
+        return Storage::url("upload/photo/{$extracted['filename']}");
+    }
+
+    private function deleteFromStorage(string $code, string $base64photo)
+    {
+        $extracted = $this->extractBase64($code, $base64photo);
+
+        Storage::disk('public')->delete("upload/photo/{$extracted['filename']}");
+    }
+
+    private function extractBase64(string $code, string $base64photo)
     {
         $toGetExtension = explode('data:image/', $base64photo)[1];
         $photoExtension = explode(';base64,', $toGetExtension);
-        $photoName = Str::random(15).'.'.$photoExtension[0];
+        $photoName = "{$code}-photos.{$photoExtension[0]}";
+        $decodedPhoto = base64_decode($photoExtension[1]);
 
-        Storage::disk('public')->put("upload/photo/{$photoName}", base64_decode($photoExtension[1]));
-
-        return Storage::url("upload/photo/{$photoName}");
+        return [
+            'filename' => $photoName,
+            'decoded' => $decodedPhoto
+        ];
     }
 }
