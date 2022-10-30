@@ -22,6 +22,10 @@ Route::apiResource('/profiles', \App\Http\Controllers\ApplicationController::cla
     'profile' => 'code'
 ])->except('destroy');
 
+Route::apiResource('/photos', \App\Http\Controllers\PhotoController::class)->scoped([
+    'photo' => 'code'
+])->except(['index', 'store']);
+
 Route::apiResource('/experiences', \App\Http\Controllers\WorkSummaryController::class)->scoped([
     'experience' => 'code'
 ])->only(['show', 'update']);
