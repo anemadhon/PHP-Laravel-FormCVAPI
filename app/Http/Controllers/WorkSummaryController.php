@@ -45,7 +45,7 @@ class WorkSummaryController extends Controller
             'user:id,application_id', 
             'user.experienceSummary'
         ])->user
-            ->experienceSummary
+            ->experienceSummary()
             ->updateOrCreate(
                 ['user_id' => $experience->user->id], 
                 $request->validated()
