@@ -20,7 +20,7 @@ class PhotoController extends Controller
         $photo64 = $photo->load([
             'user:id,application_id', 
             'user.photo'
-        ])->user->photo->base_64_photo;
+        ])->user->photo?->base_64_photo;
 
         return response()->json([
             'data' => [
